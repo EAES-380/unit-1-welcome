@@ -15,7 +15,11 @@ Answering these questions (at a high level) is the focus of this analysis.
 
 ### Packages
 
-We will use the R **tidyverse** and **scales** packages for data wrangling and visualization, and the **reactable** package for interactive display of tabular output, and **Global Carbon Project** excel (.xlsx) files for the data.
+The code chunk below labeled `load-packages` shows three three packages will will use for this analysis:  
+
+1. **tidyverse** for data wrangling (manipulation)
+2. **scales** for data visualization
+3. **reactable** for interactive display of tabular data (tables)
 
 *Note: Packages are just pre-assembled collections of functions and objects (often data)*
 
@@ -33,10 +37,11 @@ The data comes in an Excel file called `National_Carbon_Emissions_2020v1.0.xlsx`
 
 In the code chunk below:
 
--   the first line reads in the data, selects the correct tab `Territorial Emissions`, and removes 11 header rows in the excel file that we don't need.
+-   the first line after the symbol `<-` reads in the data, selects the correct tab `Territorial Emissions`, and removes 11 header rows in the excel file that we don't need.
 -   the next line renames the first column `year` from the uninformative column name `...1`.
 -   the third line rearranges the country emission data for easier plotting.
 -   the final line converts the `emissions` data column to numerical values.
+-   the symbol `<-` at the top takes the output of all of these steps and assigns it to the object `emissions`
 
 This code chunk will help you get started with the analysis.
 **Note: Don't worry about the details right now!**
@@ -53,7 +58,7 @@ emissions <-
 
 Let's create a data visualization that displays how the CO2 emissions of the **USA** have changed over time, and compare it to two other countries: the **United Kingdom** and **China**.
 
-We can easily change which countries are being plotted by changing which countries the code below `filter`s for.
+We can easily change which countries are being plotted by changing the country names in the `filter()` function in the code chunk below.
 
 *Note that the country name should be spelled and capitalized exactly the same way as it appears in the data.*
 
@@ -74,7 +79,8 @@ emissions %>%
     y = expression("Emissions (Mt C y"^{-1}*")"),
     x = "Year",
     color = "Territory"
-  )
+  ) +
+  theme_classic()
 ```
 
 ## Exercises
