@@ -2,7 +2,7 @@
 title: "Lab 01 - Hello R!"
 output: 
   tufte::tufte_html:
-    css: ../lab.css
+    css: ../../lab.css
     tufte_variant: "envisioned"
     highlight: pygments
 link-citations: yes
@@ -12,21 +12,28 @@ link-citations: yes
 R is the name of the programming language itself and RStudio is a convenient interface.
 ```
 
-The main goal of this lab is to introduce you to R and RStudio, which we will be using throughout the course both to learn the statistical concepts discussed in the course and to analyze real data and come to informed conclusions.
+The main goal of this lab is to introduce you to **R** and **RStudio**, which we will be using throughout the course to code and analyze data.
 
 ```{marginfigure}
 git is a version control system (like "Track Changes" features from Microsoft Word on steroids) and GitHub is the home for your Git-based projects on the internet (like DropBox but much, much better).
 ```
 
-An additional goal is to introduce you to Git and GitHub, which is the collaboration and version control system that we will be using throughout the course.
+A second goal is to introduce you to **Git** and **GitHub**, which is the collaboration and version control system that we will be using throughout the course.
 
-As the labs progress, you are encouraged to explore beyond what the labs dictate; a willingness to experiment will make you a much better programmer.
-Before we get to that stage, however, you need to build some basic fluency in R.
-Today we begin with the fundamental building blocks of R and RStudio: the interface, reading in data, and basic commands.
+I encourage you to explore beyond what the labs require you do; experimenting will make you a much better programmer.  
+
+Today we begin with the fundamental building blocks of R and RStudio:  
+
+- the interface
+- reading in data
+- basic R commands
 
 # Connecting GitHub and RStudio Cloud
 
-You should have already received an invitation to join the GitHub organization for this course.
+**Note**: We have probably already done this in class. If so, you can skip this section.
+
+You should have already received an email invitation to join the GitHub organization for this course. 
+
 You need to accept the invitation before moving on to the next step.
 
 To connect your RStudio and GitHub accounts by following the steps below:
@@ -68,47 +75,29 @@ knitr::include_graphics("img/github-auth-5.png")
 knitr::include_graphics("img/github-auth-6.png")
 ```
 
-# Getting started
+# Getting Started
 
 Each of your assignments will begin with the following steps.
 
-**NOTE** If you're reading this, it probably means you've completed these steps already, in which case, consider this review.
+**NOTE** If you're reading this in a Knitted output, it probably means you've completed these steps already, in which case, consider this review.
 
--   I have created a template Github repository ("repo").
-    The first step is to generate your own **private version** of this repo using the Week 3 link: [CLICK HERE](https://docs.google.com/spreadsheets/d/1j1Vlib7LjWUAHAUrEdqktdHoYQYVsl5aXeLDDnEi3Cs/edit#gid=0).
+**Steps to generate your own copy of the course materials for each Unit**:
 
--   The link will open a Github page where it asks you to name your repo.
-    **Please name it: week-3-yourlastname**.
-    For example, mine would be named: `week-3-mcnicol`
+-   Click on the Github repository you want to create your own copy of (e.g., `unit-1`)
+-   From the repository landing page, add '/generate' to the end of the url and hit return/enter
+-   Skip down to **Owner** and choose `EAES-420-Spring-24`. **Do NOT choose your own account!**
+-   Under **Repository Name** enter `unit-X-yourlastname`. 
+    - E.g., I would enter `unit-1-mcnicol` for Unit 1.
+-   You can ignore the **Description** box.
+-   Make sure your own repo is **Private**. It should be private by default.
+-   Click **Create Repository** and you will be redirected to your generated repo.
 
--   NOTE: Please ensure you have selected `EAES-420-Spring23` as the "Owner".
+**Steps to copy your generated repo into an RStudioCloud Project and open instructions**:  
 
--   NOTE: Please ensure you select `Private` respository.
-
--   The repo you just generated now contains your assignment, as well as the "starter" file you'll edit as your graded work.
-
--   Now clone it into your RStudio workspace.
-
-```{r clone-repo-link, fig.margin = TRUE, echo = FALSE, fig.width=3}
-knitr::include_graphics("img/clone-repo-link.png")
-```
-
--   On GitHub, click on the green **Code** button, select **Use HTTPS** (this might already be selected by default, and if it is, you'll see the text **Clone with HTTPS** as in the image below). Click on the clipboard icon to copy the repo URL.
-
-```{r new-project-from-gh, fig.margin = TRUE, echo = FALSE, fig.width=3}
-knitr::include_graphics("img/new-project-from-gh.png")
-```
-
--   Go to RStudio Cloud and into the course workspace. Create a **New Project from Git Repo**. You will need to click on the down arrow next to the **New Project** button to see this option.
-
-```{r paste-gh-repo-url, fig.margin = TRUE, echo = FALSE, fig.width=5}
-knitr::include_graphics("img/paste-gh-repo-url.png")
-```
-
--   Copy and paste the URL of your assignment repo into the dialog box:
-
--   Hit OK, and you're good to go!
-    RStudio will copy everything from your Github repo to your RStudio workspace.
+-   Copy the URL of the repo you created using the green `Code` button
+-   Copy/clone it into a `New Project from a GitHub Repo` in [RStudio Cloud](rstudio.cloud).
+-   Navigate to the exercise, lab, or homework folder using the `File` pane.
+-   Open the R Markdown instructions `lab-X-instructions.Rmd` or `hw-X-instructions.Rmd` and, Knit.
 
 ## Warm up
 
@@ -120,7 +109,7 @@ The top portion of your R Markdown file (between the three dashed lines) is call
 
 ### YAML
 
-Open the starter file named `lab-01.Rmd` in your project directory, change the author name to your name, and knit the document.
+Open the starter file named `lab-01-starter.Rmd` in your project directory, change the author name to your name, and knit the document.
 **This starter file is where you make all your changes. NOT in the instructions file** You do not need to make any edits to this instructions file (`lab-01-hello-r.Rmd`).
 
 ```{r yaml-raw-to-rendered, fig.fullwidth=TRUE, echo = FALSE}
