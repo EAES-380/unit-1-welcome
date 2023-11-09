@@ -20,6 +20,8 @@ git is a version control system (like "Track Changes" features from Microsoft Wo
 
 A second goal is to introduce you to **Git** and **GitHub**, which is the collaboration and version control system that we will be using throughout the course.
 
+A third and final goal is to reinforce the main lesson from lecture: that data visualization is important!
+
 I encourage you to explore beyond what the labs require you do; experimenting will make you a much better programmer.  
 
 Today we begin with the fundamental building blocks of R and RStudio:  
