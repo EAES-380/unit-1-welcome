@@ -7,4 +7,4 @@ This repository, or "repo", contains two **ungraded in-class exercises**:
 
 And **two graded assignments** you will complete by **DEADLINE**:
   - Lab 1: Hello R!
-  - Homework 1: Plastic Waste
+  - Homework 1: Earthquakes
