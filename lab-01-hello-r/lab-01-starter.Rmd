@@ -10,11 +10,20 @@ output: html_document
 ```{r load-packages, message=FALSE}
 library(tidyverse) 
 library(datasauRus)
+datasaurus_dozen <- datasaurus_dozen %>% 
+  rename(shape = dataset)
 ```
+
+If you've just finished running the first `load-packages` chunk above, you can navigate back to your Lab 01 instructions now.
 
 ## Exercises
 
 ### Exercise 1
+
+```{r demo-code-chunk}
+# replace this with ?datasaurus_dozen
+```
+
 
 Remove this text, and add your answer for Exercise 1 here.
 

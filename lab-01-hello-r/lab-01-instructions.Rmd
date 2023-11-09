@@ -151,30 +151,37 @@ Now that you have made an update and committed this change, it's time to push th
 
 ## Packages
 
-In this lab we will work with two packages: **datasauRus** which contains the dataset we'll be using and **tidyverse** which is a collection of packages for doing data analysis in a "tidy" way.
-These packages are already installed for you.
-You can load the packages by running the following in the Console.
+In this lab we will work with two packages:  
 
-```{r message=FALSE}
-library(tidyverse) 
+- **datasauRus**: containing the datasets we'll be using
+- **tidyverse**: a collection of packages for doing data analysis. 
+  
+These packages are already **installed** for you. However, you still need to **load** them (make them active in your session). 
+
+To **load** the packages, navigate to your `lab-01-starter.Rmd` window (where you just updated the YAML) and click the green play button at the top-right of the first code chunk below the YAML. 
+
+**The Green Play Button** is called the "Run Current Chunk" button. You will use it a lot. :)
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
 library(datasauRus)
+datasaurus_dozen <- datasaurus_dozen %>% 
+  rename(shape = dataset)
 ```
-
-Note that the packages are also loaded with the same commands in your R Markdown document.
 
 ## Data
 
-```{marginfigure}
-If it's confusing that the data frame is called `datasaurus_dozen` when it contains 13 datasets, you're not alone! Have you heard of a [baker's dozen](https://en.wikipedia.org/wiki/Dozen#Baker's_dozen)?
-```
+The data we will be working with today is called `datasaurus_dozen` and it an object stored in the `datasauRus` package.  
 
-The data frame we will be working with today is called `datasaurus_dozen` and it's in the `datasauRus` package.
-Actually, this single data frame contains 13 datasets, designed to show us why data visualisation is important and how summary statistics alone can be misleading.
-The different datasets are marked by the `dataset` variable.
+`datasaurus_dozen` contains x and y coordinates for 13 shapes. The summary statistics for each of these shapes are the same, but the shapes look very different.   
 
-To find out more about the dataset, type the following in your Console: `?datasaurus_dozen`.
-A question mark before the name of an object will always bring up its help file.
-This command must be ran in the Console.
+This lab is designed to show us why data visualization is important and how summary statistics alone can be misleading.  
+
+To find out more about `datasaurus_dozen`, navigate to your starter file, and replace the text in the `demo-code-chunk` with:  
+
+`?datasaurus_dozen`  
+
+**Help Files:** A question mark `?` before the name of an object will always bring up its help file.
 
 # Exercises
 
