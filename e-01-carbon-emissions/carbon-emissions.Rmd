@@ -11,7 +11,9 @@ output:
 ## Introduction
 
 How much carbon dioxide (CO2) do different countries emit, and how have their emissions changed over time?
-Answering these questions (at a high level) is the focus of this analysis. **In the process, you will try out visualizing data in R for the first time!**
+Answering these questions (at a high level) is the focus of this analysis. **In the process, you will try out visualizing data in R for the first time!**.  
+
+**NOTE: For exercises such as this, you should make changes to code directly on this exercise Rmarkdown document. For labs and homeworks, you will only edit a separate `starter` file. More on that later...** 
 
 ### Packages
 
