@@ -21,23 +21,18 @@ If you've just finished running the first `load-packages` chunk above, you can n
 ### Exercise 1
 
 ```{r demo-code-chunk}
-# replace this with ?datasaurus_dozen
+# replace this line with ?datasaurus_dozen
 ```
-
 
 Remove this text, and add your answer for Exercise 1 here.
 
 ### Exercise 2
 
-The answers for this Exercise are given for you below.  
-
-But you should clean up some of the narrative (this text) so that it only includes what you want to turn in.  
-
-First let's plot the data in the dino dataset:
+First let's plot the data in the `dino` shape:
 
 ```{r plot-dino, fig.height=3, fig.width=6}
 dino_data <- datasaurus_dozen %>%
-  filter(dataset == "dino")
+  filter(shape == "dino")
 
 ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
   geom_point()
@@ -73,7 +68,7 @@ I'm some text, you should replace me with more meaningful text...
 
 ### Exercise 4
 
-Add code and narrative as needed.  
+Add code and narrative below as needed.  
 
 Note that two R chunks are given but they are not labeled.  
 
@@ -89,6 +84,8 @@ Use the convention from above to name them appropriately.
 
 ### Exercise 5
 
-Add code and narrative as needed.  
+Add code and narrative here as needed.  
 
-To add R chunks either type out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, green C+.
+**The fastest way to insert a code chunk is to use the keyboard shortcut: command-option-i (on MacOS) or Control-Alt-i (on Windows).** Or you can add R chunks by manually typing out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, green C+.
+
+
