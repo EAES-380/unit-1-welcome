@@ -12,13 +12,11 @@ output:
 
 In this mini analysis we work with the data used in the FiveThirtyEight story titled ["Where People Go to Check the Weather"](https://fivethirtyeight.com/features/weather-forecast-news-app-habits/).  
 
-The Github source for the data and variables descriptions are [here](https://github.com/fivethirtyeight/data/tree/master/weather-check).
-
 Your task is to fill in the blanks denoted by `___` (blank) in the main text and in the code chunks.
 
-To allow you to knit the document before you have filled in the `___` (blanks), I have added a `#` sign at the start of the line to "comment-out" some lines tell R to skip these lines of code.  
+To allow you to knit the document before you have filled in the `___` (blanks), I have added a `#` sign at the start of the line to "comment-out" some lines, *which tells R to skip these lines of code.*
 
-You can fix this by deleting the `#` sign.  
+To make R run these lines of code, remember to delete the `#` sign.  
 
 **NOTE: For exercises such as this, you should make changes to code directly on this exercise Rmarkdown document. For labs and homeworks, you will only edit a separate `starter` file. More on that later...** 
 
@@ -36,11 +34,13 @@ library(tidyverse)
 
 The dataset contains Survey Monkey Poll results from April 6 to April 10, 2015. The poll asked `r nrow(weather_check)` people where they go to check the weather forecast.  
 
-Only `r round(sum(weather_check$ck_weather == TRUE)/nrow(weather_check)*100)`% of respondents checked the weather daily.  
+Before you move on, I recommend you `Knit` 🧶 this document and follow the instructions there. Then, when you are prompted to make changes to the code, return to the underlying RStudio document.
 
 ## Warm-up
 
-The following code chunk filters the dataset to only retain rows (people) who said they check the weather every day. The output of this filtering is assigned to the new object `weather_check_daily`.
+One finding of the survey was that only `r round(sum(weather_check$ck_weather == TRUE)/nrow(weather_check)*100)`% of respondents checked the weather every day. Let's start by limiting our analysis to only the respondents that checked the weather every day!
+
+The following code chunk uses the `filter()` function to filter *for* rows (individual respondents) who said that they check the weather every day. The output of this filtering is assigned to the new object `weather_check_daily`.
 
 ```{r filter-for-daily}
 weather_check_daily <- weather_check %>% 
