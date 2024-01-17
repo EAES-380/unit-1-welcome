@@ -12,13 +12,11 @@ output:
 
 In this mini analysis we work with the data used in the FiveThirtyEight story titled ["Where People Go to Check the Weather"](https://fivethirtyeight.com/features/weather-forecast-news-app-habits/).  
 
-The Github source for the data and variables descriptions are [here](https://github.com/fivethirtyeight/data/tree/master/weather-check).
-
 Your task is to fill in the blanks denoted by `___` (blank) in the main text and in the code chunks.
 
-To allow you to knit the document before you have filled in the `___` (blanks), I have added a `#` sign at the start of the line to "comment-out" some lines tell R to skip these lines of code.  
+To allow you to knit the document before you have filled in the `___` (blanks), I have added a `#` sign at the start of the line to "comment-out" some lines, *which tells R to skip these lines of code.*
 
-You can fix this by deleting the `#` sign.  
+To make R run these lines of code, remember to delete the `#` sign.  
 
 **NOTE: For exercises such as this, you should make changes to code directly on this exercise Rmarkdown document. For labs and homeworks, you will only edit a separate `starter` file. More on that later...** 
 
@@ -36,26 +34,73 @@ library(tidyverse)
 
 The dataset contains Survey Monkey Poll results from April 6 to April 10, 2015. The poll asked `r nrow(weather_check)` people where they go to check the weather forecast.  
 
-Only `r round(sum(weather_check$ck_weather == TRUE)/nrow(weather_check)*100)`% of respondents checked the weather daily.  
+Before you move on, I recommend you `Knit` 🧶 this document and follow the instructions there. Then, when you are prompted to make changes to the code, return to the underlying RStudio document.
 
 ## Warm-up
 
-The following code chunk filters the dataset to only retain rows (people) who said they check the weather every day. The output of this filtering is assigned to the new object `weather_check_daily`.
+One finding of the survey was that only `r round(sum(weather_check$ck_weather == TRUE)/nrow(weather_check)*100)`% of respondents checked the weather every day. Let's start by limiting our analysis to only the respondents that checked the weather every day!
+
+The following code chunk uses the `filter()` function to filter *for* rows (individual respondents) who said that they check the weather every day. The output of this filtering is assigned to the new object `weather_check_daily`.
 
 ```{r filter-for-daily}
 weather_check_daily <- weather_check %>% 
   filter(ck_weather == TRUE)
 ```
 
-Now that we've created this filtered object, complete the following blank with in-line code to count the number of people (rows) who check the weather every day.
+### Writing in-line code
+
+Now that we've created this filtered object containing only the respondents that check the weather every day, let's find out how many respondents there are. We can do this in a few different ways:
+
+**1 - Help Pages**: Use the *Help* tab on the lower-right window of the RStudio IDE. Do you see the small search bar with the magnifying glass 🔍 ? Search for the data object `weather_check` in that box.  
+
+The Help pages will appear listed at the bottom of the Search Results. Click on the object link to open the help page for `weather_check`.  
+
+Take a few minutes to review the help page...  
+
+After reviewing, you will know that the dataset contains 928 respondents (rows).
+
+**2 - Objects in your Environment**: Now look at the *Environment* tab on the upper-right window of the RStudio IDE. Do you see anything listed? At this point, you shouldn't, because we haven't yet run any code chunks manually.  
+
+To generate the `weather_check_daily` object, run the two chunks above (the first loads the packages, the second creates the object). Do you now see the object? Do you see how many *observations* there are? This is equal to the number of *rows*... 
+
+Hold on, the numbers are different! Take a moment to think about why the number of rows in the `object` are different to the number of rows reported in the *Help page*.
+
+**3 - Insert your own code chunk**: You can also get the number of rows (respondents) of a data object by writing your own code chunk. To do this, we need to use the function `nrow()`. We add the data object name within the parentheses `()` to apply the function to `weather_check_daily`.
+
+Insert a code chunk in the empty lines below using the green C button at the top right of this window and then clicking on `R`. Then write the function `nrow()` and add the `weather_check_daily` object within the parentheses. 
+
+Now try running the code chunk! Does it output a number?
+
+
+
+
+There is a keyboard short-cut to insert a code chunk. Move your cursor to the line where you want to insert a chunk and click:  
+
+- MacOS: command-option-I
+- Windows: control-alt-I
+
+Try it in the space below:
+
+
+
+
+**4 - In-line code**: OK, this is the method and you will rarely use it, but it is a nice Rmarkdown trick! Rather than creating an entire chunk, you can also write *in-line code* which allows you to combine the output of code with text on the same line.  
+
+To write in-line code, you simply open back ticks ` `, then add `r` to tell it to use the language R, then write your function. Here's a full example for a related function `ncol` that gives you the number of columns in a dataset.
+
+There are `r ncol(weather_check_daily)` columns in the dataset! Knit 🧶 this document to see the output of the in-line code. Did it work?  
+
+Now complete the blank below with in-line code to count the number of people (rows) who check the weather every day.
 
 There are `___` respondents who check the weather daily. 
+
+OK, now you are familiar with ways of finding the dimensions of a dataset and inserting code chunks, let's move on!
 
 ## Data Dictionary
 
 The `weather_check` variables we'll focus on are the following:
 
--   `weather_source`  
+1.   `weather_source`  which contains the following options:  
 
     - "The Weather Channel"
     - "Local TV News"
@@ -69,15 +114,20 @@ The `weather_check` variables we'll focus on are the following:
     
 Notice that if the last option *A specific website or app* is selected, then the respondent must provide a written answer which gets saved in the variable named `weather_source_site`
 
--   `age`: Age range of respondent (18-29, 30-44, 45-59, 60+)
+2.   `age`: Age range of respondent (18-29, 30-44, 45-59, 60+)
 
--   `hhold_income`: Response to "How much total combined money did all members of your household earn last year?"
+3.   `hhold_income`: Response to "How much total combined money did all members of your household earn last year?"
 
-And we'll also use the `region` and `female` variables for **grouping**.
+4.    `region`: part of the US the respondent lives
 
+5.    `female`: is the respondent female
+
+## Exploring the data
 ### Frequency of Each Weather Source
 
-Let's take a look at the different `weather_source` responses, and how frequently each of them appeared:
+Let's take a look at the different `weather_source` responses, and how frequently each of them appeared.   
+
+*Don't worry about understanding the code, but take a careful look at and interact with the output table to understand the dataset. If the table is hard to read below, you can click the grey page popup button 📑 at the top-right of the table to look at it in a separate window.*
 
 ```{r summarize-source, message = FALSE}
 weather_check_daily %>%
@@ -87,13 +137,13 @@ weather_check_daily %>%
 
 ### Frequency of Weather Source Site
 
-Next, let's take a look at the different `weather_source_site` responses (which site respondents used if they used "a specific website or app").  
+Next, let's take a look at the different `weather_source_site` responses (which site respondents used if they used "a specific website or app").  Fill in the blank in the group_by function below with the `weather_source_site` variable. Don't forget to remove the `#` signs too!
 
 Once you complete and run the code chunk below, what do you notice about the written responses that relates to the goals of this course?  
 
-**Hint:** Are these data responses in a standard format?)
+**Hint:** Are these data responses in a tidy format?
 
-```{r message = FALSE}
+```{r summarize-source-site, message = FALSE}
 # weather_check_daily %>%
 #   group_by(___) %>%
 #   summarise(weather_source_count = n())
@@ -101,9 +151,11 @@ Once you complete and run the code chunk below, what do you notice about the wri
 
 ### Frequency of Weather Source, Grouped by Age
 
-Next, we might wonder how the `weather_source` varies with `age` range of the respondent:
+Next, we might wonder how the `weather_source` varies with `age` range of the respondent. Fill in the blanks in the `group_by` function, with these two variables:
 
-```{r}
+*Note: Use the grey page popout button 📑 to see the entire output table*
+
+```{r summarize-source-by-age}
 # weather_check_daily %>%
 #   group_by(___, ___) %>%
 #   summarise(weather_source_count = n())
@@ -113,23 +165,21 @@ Notice that creating these count summaries of the data is fast, and can be done 
 
 ### Frequency of Weather Source, Grouped by Household Income
 
-Next, we might wonder how the `weather_source` varies with `hhold_income` range of the respondent:
+Next, we might wonder how the `weather_source` varies with `hhold_income` range of the respondent. Fill in the blanks in the `group_by` function, with these two variables:
 
-```{r}
+```{r summarize-by-income}
 # weather_check_daily %>%
 #   group_by(___, ___) %>%
 #   summarise(weather_source_count = n())
 ```
 
-There are `___` combinations of responses here so it's hard to see which combinations are most frequent.  
-
-**Hint**: To complete the blank above, look at how many rows (combinations of of `weather_source` and `hhold_income`) are in the last chunk's output.
+We might be interested in which weather sources are used most at each income level. However, notice that there are many combinations of responses, so it's hard to see which combinations are most frequent!
 
 ### Arranging output by descending frequency
 
-We can arrange the responses from most frequent to least frequent using:
+We can arrange the responses from most frequent to least frequent using the code chunk below that includes a new line with `arrange(desc(___))`. What do you think this line does? Complete the chunk to arrange the `weather_source_count` output.
 
-```{r}
+```{r arrange-source-count-summary}
 # weather_check_daily %>%
 #   group_by(___, ___) %>%
 #   summarise(weather_source_count = n()) %>% 
@@ -142,7 +192,7 @@ You might also ask whether use of a particular weather source varies between mal
 
 First, let's assign the frequency data (using `<-`) we need as a new object called `weather_check_female_counts`:
 
-```{r message = FALSE}
+```{r create-female-counts-object, message = FALSE}
 weather_check_female_counts <- weather_check_daily %>%
   group_by(female, weather_source) %>%
   summarise(weather_source_count = n())
@@ -150,9 +200,11 @@ weather_check_female_counts <- weather_check_daily %>%
 
 ### Plotting Weather Source, Coloring by Gender
 
-Next, let's pass the new data object to a the `ggplot` plotting function: Remove the `#`s (i.e. uncomment the code) and complete the code chunk below:
+Next, let's pass the new data object to a the `ggplot` plotting function: Remove the `#`s (i.e. uncomment the code) and complete the code chunk below to create a plot.  
 
-```{r warning = FALSE}
+Don't worry about every detail, but try to follow the logic. For example, what do you think needs to go in the blank after `data =`? Where is the data coming from that we want to plot?
+
+```{r plot-source-by-gender, warning = FALSE}
 # ggplot(data = ___, 
 #        mapping = aes(x = weather_source, y = weather_source_count, color = female)) +
 #   geom_point() +
@@ -165,16 +217,15 @@ Next, let's pass the new data object to a the `ggplot` plotting function: Remove
 
 ### What about patterns with Age?
 
-First, we the code chunk below will create the object `weather_check_age_counts`, which summarizes the `weather_source` by the `age` grouping variable.
+First, use the code chunk below to create the object `weather_check_age_counts`, which summarizes the `weather_source` by the `age` grouping variable.
 
-```{r message = FALSE}
+```{r summarize-counts-by-age, message = FALSE}
 weather_check_age_counts <- weather_check_daily %>%
   group_by(age, weather_source) %>%
   summarise(weather_source_count = n())
 ```
 
 ### Plotting Weather Source, Coloring by Age
-
 
 Next, remove the `#`s (i.e. uncomment the code) and complete the code chunk below to visualize the data and assign colors based on `age` groups.
 
@@ -188,3 +239,5 @@ Next, remove the `#`s (i.e. uncomment the code) and complete the code chunk belo
 #        color = "age") +
 #   coord_flip()
 ```
+
+Good job, you finished Exercise 2!
