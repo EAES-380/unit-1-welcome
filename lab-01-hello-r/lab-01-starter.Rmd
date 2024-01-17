@@ -53,14 +53,13 @@ Note that the R chunks are labelled with `plot-star` and `cor-star` to provide s
 
 To finish, clean up the narrative by removing these instructions.
 
-I'm some text, you should replace me with more meaningful text...
-(Hint: describe what are you doing in the next code chunk)
+I'm some text, you should replace me with text that tells the reader (Martina and me) what you are doing in the code chunk below.
 
 ```{r plot-star}
 
 ```
 
-I'm some text, you should replace me with more meaningful text...
+I'm some text, you should replace me with text that tells the reader whether the correlation coefficients are the same for star and dino.
 
 ```{r cor-star}
 

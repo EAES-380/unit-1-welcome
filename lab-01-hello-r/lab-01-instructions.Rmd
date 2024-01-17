@@ -139,15 +139,15 @@ knitr::include_graphics("img/update-author-name-commit.png")
 
 **Advice on When to Commit:** You don't have to commit after every change! You should consider committing states that are *meaningful to you* for inspection, comparison, or restoration.  
 
-In the first few assignments we will tell you exactly when to commit and in some cases, what commit message to use. As the semester progresses we will let you make these decisions.
+In the first few assignments we will tell you exactly when to commit and, in some cases, what commit message to use. As the semester progresses we will let you make these decisions.
 
 ### Pushing changes
 
-Now that you have made an update and committed this change, it's time to push these changes to the web! Or more specifically, to your repo on GitHub.  
+Now that you have made an update and committed this change, it's time to push these changes to the web! Or more specifically, to your private repo on our class GitHub organization (`EAES-420-Spring-24`).  
 
-**Why?** Because it lets us "your instructors" see your changes and grade your work. Don't worry your repo is not visible to your classmates.  
+**Why?** Because it lets us - "your instructors" - see your changes and grade your work. Don't worry, your repo is *not* visible to your classmates!  
 
-**How?** In order to push your changes to GitHub, click on **Push**. This will prompt a dialogue box where you first need to enter your user name, and then your password. 
+**How?** In order to push your changes to GitHub, click on **Push**. This will prompt a dialogue box where you first need to enter your user name, and then your Github PAT (personal access token - just a fancy password).
 
 ## Packages
 
@@ -201,7 +201,8 @@ For each exercise, **read** the exercise prompt in the `lab-01-instructions.Rmd`
 
 ### End of Exercise 1
 
-Let's take a look at what these datasets are.
+OK, now let's take a look at what these datasets are.  
+
 To do so we can make a *frequency table* of the shape variable:
 
 ```{r}
@@ -214,20 +215,22 @@ datasaurus_dozen %>%
 Matejka, Justin, and George Fitzmaurice. "Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing." Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems. ACM, 2017.
 ```
 
-The original Datasaurus (`dino`) was created by Alberto Cairo in [this great blog post](http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html).
-The other Dozen were generated using simulated annealing and the process is described in the paper *Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics* through Simulated Annealing by Justin Matejka and George Fitzmaurice.
-In the paper, the authors simulate a variety of datasets that have the same summary statistics as the Datasaurus but have very different distributions.
+The original Datasaurus (`dino`) was created by Alberto Cairo in [this great blog post](http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html).  
+
+The other datasets (`star`, `away`, `circle`, etc.) were generated using a method called simulated annealing and the process is described in the paper *Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics* through Simulated Annealing by Justin Matejka and George Fitzmaurice. In the paper, the authors simulate a variety of datasets that have the same summary statistics as the `dino`, but have very different visual distributions (shapes).
 
 🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 1". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
-2.  In this exercise, you will run two R code chunks provided below **and** in your starter file to (for this exercise, you don't need to add any code in your starter file, just follow along):
+2.  In this exercise, you will run two R code chunks provided below **and** in your starter file to:
 
 - Create a scatter plot of `y` vs. `x` for the `dino` shape
 - Calculate the correlation coefficient between `x` and `y` for the `dino` shape
 
-First let's plot the data in the `dino` shape:
+*Note:* For this exercise, you don't need to add any code in your starter file, just follow along.
 
-```{r plot-dino}
+Before we can plot the data in the `dino` shape, we need to filter out the other shapes in the dataset, leaving just the `dino` dataset. The code chunk below does this:
+
+```{r filter-for-dino}
 dino_data <- datasaurus_dozen %>%
   filter(shape == "dino")
 ```
@@ -238,44 +241,61 @@ First, the pipe operator, `%>%`, takes what comes before it and sends it as the 
 
 Second, the assignment operator: `<-`, assigns the name `dino_data` to the filtered data frame.
 
-Next, we need to visualize these data.
-We will use the `ggplot` function for this.  
+Next, let's take a look at what variables the `dino` dataset contains. The code chunk below does this:
 
-The first argument is the data you're visualizing.  
+```{r look-at-dino-head}
+head(dino_data)
+```
 
-Next we define the `aes`thetic mappings.  
+Let's break down this code:
 
-In other words, which columns of the dataset get mapped to certain aesthetic features of the plot. In our example, the `x` axis will show data from the variable called `x` and the `y` axis will show data from the variable called `y`.  
+This code chunk contains a single function `head()` which returns the first few rows of a dataset, as well as the column (variable) names. Do you see that there are three variables: `shape`, `x` and `y`?
 
-Then, we add another layer to this plot where we define which `geom`etric shapes we want to use to represent each observation in the data. In this case we want these to be points, hence `geom_point`.
+OK, now finally, lets visualize these data. The code chunk below does this:
 
-```{r fig.fullwidth=TRUE}
+```{r plot-dino, fig.fullwidth=TRUE}
 ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
 
-If this seems like a lot, it is.  
+Let's break this chunk down:
 
-You will learn about the philosophy of building data visualizations in layer in detail next week. For now, follow along with the code that is provided.
+We use the `ggplot()` function for plotting.  
 
-For the second part of these exercises, we need to calculate a summary statistic: the correlation coefficient. Correlation coefficient, often referred to as $r$ in statistics, measures the linear association between two variables.  
+The first argument (`data = `) specifies the data object you're visualizing.  
+
+Next we define the `aes`thetic mappings.  
+
+In other words, we define which columns of the dataset get mapped to certain aesthetic features of the plot. In our example, the `x` axis will show data from the variable called `x` and the `y` axis will show data from the variable called `y`.  
+
+Then, in the last line of the chunk above, we add a layer to this plot where we define which `geom`etric shapes we want to use to represent each observation in the data. In this case we want these to be points, hence `geom_point()`.
+
+If this seems like a lot right now, it is.
+
+But don't worry! You will learn more about building data visualizations with layers in detail next week. For now, keep following along with the code that is provided.
+
+For the second part of these exercises, we need to calculate a summary statistic: the correlation coefficient.  
+
+Correlation coefficients, often referred to with the letter $r$ in statistics, measures the linear (straight-line) association between two variables.  
 
 You will see in the visualizations that some of the pairs of variables we plot **do not** have a linear relationship between them.  
 
-This is exactly why we want to visualize first: visualize to assess the form of the relationship, and calculate $r$ only if relevant.  
+This is exactly why we want to visualize first: visualize to assess the form of the relationship, and calculate $r$ only if it seems useful to do so.  
 
-In this case, calculating a correlation coefficient really doesn't make sense since the relationship between `x` and `y` is definitely not linear -- it's dinosaurial!  
+In this case, calculating a correlation coefficient really doesn't make sense since the relationship between `x` and `y` is definitely not linear -- it's dinosaurial! 🦖
 
-But, for illustrative purposes, let's calculate the correlation coefficient between `x` and `y`.
+But, to demonstrate this, let's calculate the correlation coefficient between `x` and `y`.
 
 ```{marginfigure}
 Start with `dino_data` and calculate a summary statistic that we will call `r` as the `cor`relation between `x` and `y`.
 ```
 
-```{r}
+```{r dino-cor}
 dino_data %>%
   summarize(r = cor(x, y))
 ```
+
+Just a reminder: You do not need to write any code or text for Exercise 2. Just make sure you understand the text above, run the code chunks, and view the output.
 
 ### End of Exercise 2
 
@@ -283,7 +303,7 @@ dino_data %>%
 
 3.  Plot `y` vs. `x` for the `star` shape.  
 
-- You can (and should) reuse code chunks we introduced above, just replace the shape name with the desired shape.
+- You should reuse (copy and paste) the code chunks we introduced above, just replace the shape name with the desired shape.
 - Then, calculate the correlation coefficient between `x` and `y` for this shape. 
 - How does this value compare to the `r` of `dino`?
 
@@ -293,7 +313,7 @@ dino_data %>%
 
 4.  Plot `y` vs. `x` for the `circle` shape.  
 
-- You can (and should) reuse code chunks we introduced above, just replace the shape name with the desired shape.
+- You should reuse (copy and paste) the code chunks we introduced above, just replace the shape name with the desired shape.
 - Then, calculate the correlation coefficient between `x` and `y` for this shape. 
 - How does this value compare to the `r` of `dino`?
 
@@ -324,6 +344,8 @@ datasaurus_dozen %>%
   summarize(r = cor(x, y)) %>%
   print(13)
 ```
+
+OK, you can see *all* of the shapes on one plot. And you can see *all* of the correlation coefficients. Does anything surprise you? Why might it be important to visualize data first, and not merely rely on descriptive statistics?
 
 ### End of Exercise 5
 
@@ -377,4 +399,4 @@ Play around with these until you're happy with the look.
 Not sure how to use emojis on your computer? Maybe a teammate can help? Or you can ask your TA as well!
 ```
 
-🧶 ✅ ⬆️ *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1!* 💪*", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
+🧶 ✅ ⬆️ *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1!", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
