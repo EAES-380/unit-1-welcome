@@ -274,8 +274,9 @@ If this seems like a lot right now, it is.
 
 But don't worry! You will learn more about building data visualizations with layers in detail next week. For now, keep following along with the code that is provided.
 
-For the second part of these exercises, we need to calculate a summary statistic: the correlation coefficient.  
+# Summary Statistics: Correlation Coefficient
 
+For the second part of these exercises, we need to calculate a summary statistic: the correlation coefficient.  
 Correlation coefficients, often referred to with the letter $r$ in statistics, measures the linear (straight-line) association between two variables.  
 
 You will see in the visualizations that some of the pairs of variables we plot **do not** have a linear relationship between them.  
