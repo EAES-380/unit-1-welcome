@@ -52,7 +52,7 @@ dino_data %>%
 ### Exercise 3
 
 I copied and pasted the code from the dinosaur plot earlier and replaced "dino" with "plot-star". I also had to delete some extra text that I determined wasn't necessary through trial and error running (it told me what I didn't need after I ran it). 
-
+no first person, concise
 ```{r plot-star,fig.height=3, fig.width=6}
 star_data <- datasaurus_dozen %>%
   filter(shape == "star")
@@ -80,7 +80,7 @@ ggplot(data = star2_data, mapping = aes(x = x, y = y)) +
 
 ### Exercise 4
 
-Add code and narrative below as needed.  
+Add code and narrative below as needed.  -1
 
 Note that two R chunks are given but they are not labeled.  
 
@@ -105,7 +105,7 @@ The circle's coeffeicient is -0.068, slightly smaller than dino's.
 ```
 
 ### Exercise 5
-
+-.5
 ```{r}
 ggplot(datasaurus_dozen, aes(x = x, y = y, color = shape))+
   geom_point()+
@@ -123,4 +123,4 @@ datasaurus_dozen %>%
 
 **The fastest way to insert a code chunk is to use the keyboard shortcut: command-option-i (on MacOS) or Control-Alt-i (on Windows).** Or you can add R chunks by manually typing out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, green C+.
 
-
+-1 repo name should be unit-1-williams-mia or unit-1-williams
