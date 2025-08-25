@@ -1,4 +1,4 @@
-# Unit 1: Welcome to Data Science
+# Unit 1: Welcome to Data Science 
 
 This repository, or "repo", contains two **ungraded in-class exercises**:
 
@@ -8,3 +8,5 @@ This repository, or "repo", contains two **ungraded in-class exercises**:
 And **two graded assignments** you will complete by **1/17**:
   - Lab 1: Hello R!
   - Homework 1: Earthquakes
+
+v. Fall 2025
