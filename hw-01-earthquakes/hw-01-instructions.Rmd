@@ -72,7 +72,7 @@ Each of your assignments will begin with the following steps.
 
 -   Click on the Github repository you want to create your own copy of (e.g., `unit-1`)
 -   From the repository landing page, add '/generate' to the end of the url and hit return/enter
--   Skip down to **Owner** and choose `EAES-420-Spring-24`. **Do NOT choose your own account!**
+-   Skip down to **Owner** and choose `EAES-380`. **Do NOT choose your own account!**
 -   Under **Repository Name** enter `unit-X-yourlastname`. 
     - E.g., I would enter `unit-1-mcnicol` for Unit 1.
 -   You can ignore the **Description** box.
