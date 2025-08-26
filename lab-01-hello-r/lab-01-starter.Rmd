@@ -1,10 +1,8 @@
 ---
 title: "Lab 01 - Hello R"
-author: "Mia Williams"
-date: "01/17/2024"
-output: 
-  html_document: 
-    fig_height: 7
+author: "Insert your name here"
+date: "Insert date here"
+output: github_document
 ---
 
 ## Load packages and data
@@ -12,31 +10,24 @@ output:
 ```{r load-packages, message=FALSE}
 library(tidyverse) 
 library(datasauRus)
-datasaurus_dozen <- datasaurus_dozen %>% 
-  rename(shape = dataset)
 ```
-
-If you've just finished running the first `load-packages` chunk above, you can navigate back to your Lab 01 instructions now.
 
 ## Exercises
 
 ### Exercise 1
 
-```{r ?datasaurus_dozen}
-# replace this line with ?datasaurus_dozen
-?datasaurus_dozen
-```
-
-3 columns, 1846 rows
-variables: dataset, x-values, y-values
+Remove this text, and add your answer for Exercise 1 here.
 
 ### Exercise 2
 
-First let's plot the data in the `dino` shape:
+The answers for this Exercise are given for you below.
+But you should clean up some of the narrative so that it only includes what you want to turn in.
+
+First let's plot the data in the dino dataset:
 
 ```{r plot-dino, fig.height=3, fig.width=6}
 dino_data <- datasaurus_dozen %>%
-  filter(shape == "dino")
+  filter(dataset == "dino")
 
 ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
   geom_point()
@@ -51,76 +42,41 @@ dino_data %>%
 
 ### Exercise 3
 
-I copied and pasted the code from the dinosaur plot earlier and replaced "dino" with "plot-star". I also had to delete some extra text that I determined wasn't necessary through trial and error running (it told me what I didn't need after I ran it). 
-no first person, concise
-```{r plot-star,fig.height=3, fig.width=6}
-star_data <- datasaurus_dozen %>%
-  filter(shape == "star")
+Add code and narrative as needed.
+Note that the R chunks are labelled with `plot-star` and `cor-star` to provide spaces to place the code for plotting and calculating the correlation coefficient.
+To finish, clean up the narrative by removing these instructions.
 
-ggplot(data = star_data, mapping = aes(x = x, y = y)) +
-  geom_point()
+I'm some text, you should replace me with more meaningful text...
+(Hint: describe what are you doing in the next code chunk)
 
-star_data %>%
-  summarize(r = cor(x, y))
+```{r plot-star}
 
 ```
 
-Between dino and star, the correlation coefficients are NOT the same but they are similar. Dino is -0.065 and star is -0.063. 
+I'm some text, you should replace me with more meaningful text...
 
-```{r cor-star, fig.height=3, fig.width=6}
-star2_data <- datasaurus_dozen %>%
-  filter(shape == "star")
-
-ggplot(data = star2_data, mapping = aes(x = x, y = y)) +
-  geom_point()
+```{r cor-star}
 
 ```
-
-
 
 ### Exercise 4
 
-Add code and narrative below as needed.  -1
-
-Note that two R chunks are given but they are not labeled.  
-
+Add code and narrative as needed.
+Note that two R chunks are given but they are not labeled.
 Use the convention from above to name them appropriately.
 
-```{r plot-circle,fig.height=3, fig.width=6}
-circle_data <- datasaurus_dozen %>%
-  filter(shape == "circle")
-
-ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
-  geom_point()
-
-circle_data %>%
-  summarize(r = cor(x, y))
+```{r}
 
 ```
-
-The circle's coeffeicient is -0.068, slightly smaller than dino's. 
 
 ```{r}
 
 ```
 
 ### Exercise 5
--.5
-```{r}
-ggplot(datasaurus_dozen, aes(x = x, y = y, color = shape))+
-  geom_point()+
-  facet_wrap(~ shape, ncol = 3) +
-  theme(legend.position = "none")
-```
 
-```{r}
-datasaurus_dozen %>%
-  group_by(shape) %>%
-  summarize(r = cor(x, y)) %>%
-  print(13)
-```
+Add code and narrative as needed.
+To add R chunks either type out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, green C+.
   
 
 **The fastest way to insert a code chunk is to use the keyboard shortcut: command-option-i (on MacOS) or Control-Alt-i (on Windows).** Or you can add R chunks by manually typing out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, green C+.
-
--1 repo name should be unit-1-williams-mia or unit-1-williams
