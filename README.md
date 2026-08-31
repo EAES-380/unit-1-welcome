@@ -5,8 +5,8 @@ This repository, or "repo", contains two **ungraded in-class exercises**:
   - Exercise 1: Carbon Dioxide Emissions
   - Exercise 2: Weather Check
 
-And **two graded assignments** you will complete by **9/10/2025**:
+And **two graded assignments** you will complete by **9/9/2026**:
   - Lab 1: Hello R!
   - Homework 1: Earthquakes
 
-v. Fall 2025
+v. Fall 2026
