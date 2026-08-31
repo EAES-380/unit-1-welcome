@@ -8,396 +8,421 @@ output:
 link-citations: yes
 ---
 
+# Academic integrity and honor code
+
+This lab is designed to help you build your own fluency with R, RStudio, Git, and GitHub. **Generative AI tools are not permitted for this assignment.** This includes ChatGPT, Claude, Gemini, Copilot, Grok, and similar tools that can generate or revise code, written answers, interpretations, or assignment content.
+
+By completing and submitting this lab, I certify that:
+
+- I completed the submitted work myself.
+- I did not use generative AI to generate, debug, revise, or interpret code or written answers for this assignment.
+- I may use course materials, lecture notes, R documentation/help files, and other resources explicitly approved by the instructors.
+- I understand that I am responsible for being able to explain all code and written work that I submit.
+
+**Name:** ______________________________  
+**Signature:** ___________________________  
+**Date:** _______________________________
+
+> **Important:** Signing this statement is part of the assignment. The same statement appears in your starter file; complete it there as well.
+
+# Lab overview
+
 ```{marginfigure}
-R is the name of the programming language itself and RStudio is a convenient interface.
+R is the name of the programming language itself; RStudio is an interface that makes it easier to write, run, and organize R code.
 ```
 
-The main goal of this lab is to introduce you to **R** and **RStudio**, which we will be using throughout the course to code and analyze data.
+The main goal of this lab is to introduce you to **R** and **RStudio**, which we will use throughout the course to code, visualize, and analyze environmental data.
 
 ```{marginfigure}
-git is a version control system (like "Track Changes" features from Microsoft Word on steroids) and GitHub is the home for your Git-based projects on the internet (like DropBox but much, much better).
+Git is a version-control system (think "Track Changes" on steroids). GitHub stores Git-based projects online and makes it possible to collaborate, track changes, and recover earlier versions of your work.
 ```
 
-A second goal is to introduce you to **Git** and **GitHub**, which is the collaboration and version control system that we will be using throughout the course.
+A second goal is to introduce you to **Git** and **GitHub**, the version-control workflow we will use throughout the course.
 
-A third and final goal is to reinforce the main lesson from lecture: **that data visualization is important!**
+A third goal is to reinforce the main lesson from lecture: **data visualization is important.** Summary statistics can hide important patterns in data.
 
-I encourage you to explore beyond what the labs require you do; experimenting will make you a much better programmer.  
+Experiment beyond the minimum requirements when you have time. Trying things, breaking code, and figuring out why it broke are important parts of learning to program.
 
-Today we begin with the fundamental building blocks of R and RStudio:  
+## Learning goals
 
-- the interface
-- reading in data
-- basic R commands
+By the end of this lab, you should be able to:
+
+A. Navigate the basic RStudio interface.
+B. Edit and Knit an R Markdown (`.Rmd`) document.
+C. Load R packages and inspect a dataset.
+D. Run simple `dplyr` and `ggplot2` code.
+E. Explain why visualization should accompany summary statistics.
+F. Commit and push meaningful changes with Git and GitHub.
+
+## Deliverable
+
+Complete **`lab-01-starter.Rmd`**. Your finished starter file should contain your code, plots, and written responses and should Knit successfully from top to bottom.
+
+**The instructions file tells you what to do; the starter file is where your assignment work belongs, except for completing the honor-code signature above.**
+
+## Reproducibility rule
+
+Throughout EAES 380, your analysis should work **from top to bottom**. Code that works only because you previously ran something in the Console is not reproducible.
+
+**Knit frequently.** Knitting is one of the best ways to discover whether your document actually contains everything needed to reproduce your work.
+
+## Before asking for help
+
+First check:
+
+- Did you run the relevant chunks from top to bottom?
+- Did you spell every object and variable name exactly as shown? R is case-sensitive.
+- Are all parentheses, quotation marks, and backticks closed?
+- Did you load the packages needed by your code?
+- Does the error message point to a particular chunk or line?
+- Have you tried Knitting the document to identify where the problem first occurs?
+
+If you still cannot resolve the problem, ask your instructor or TA and show them the code and error message.
 
 # Connecting GitHub and RStudio Cloud
 
-**Note**: We have probably already done this in class. If so, you can skip this section.
+**Note:** We will probably complete this setup together in class. If you have already connected your accounts, you can skip this section.
 
-You should have already received an email invitation to join the GitHub organization for this course. 
+You should have received an email invitation to join the GitHub organization for this course. **Accept the invitation before continuing.**
 
-You need to accept the invitation before moving on to the next step.
+To connect your RStudio and GitHub accounts:
 
-To connect your RStudio and GitHub accounts by following the steps below:
-
--   Click on your name on the top right corner to open the right menu.
--   Then, click on Authentication.
+- Click on your name in the top-right corner to open the menu.
+- Click **Authentication**.
 
 ```{r github-auth-1, echo = FALSE}
 knitr::include_graphics("img/github-auth-1.png")
 ```
 
--   In the Authentication window, check the box for *Enabled*.
+- In the Authentication window, check the box for *Enabled*.
 
 ```{r github-auth-2, echo = FALSE}
 knitr::include_graphics("img/github-auth-2.png")
 ```
 
--   In the next window, click on the green box that says "Authorize rstudio".
+- In the next window, click the green **Authorize rstudio** button.
 
 ```{r github-auth-3, echo = FALSE}
 knitr::include_graphics("img/github-auth-3.png")
 ```
 
--   Back in the Authentication window, check the box for *Private repo access also enabled*, and once again, on the green box that says "Authorize rstudio" in the next window. At this point you should also make sure that the course organization shows up for you under *Organization access*. If it does not, this means you have not yet accepted the GitHub invitation to join the course, and you should go back and do that.
+- Back in the Authentication window, check *Private repo access also enabled* and authorize RStudio again.
+- Confirm that the course organization appears under *Organization access*. If it does not, return to GitHub and confirm that you accepted the course invitation.
 
 ```{r github-auth-4, echo = FALSE}
 knitr::include_graphics("img/github-auth-4.png")
 ```
 
--   Once you're done, both of these boxes should be checked.
+- When finished, both boxes should be checked.
 
 ```{r github-auth-5, echo = FALSE}
 knitr::include_graphics("img/github-auth-5.png")
 ```
 
--   To confirm that you've successfully linked up your GitHub and RStudio Cloud accounts, [GitHub settings \> Applications](https://github.com/settings/applications). You should see RStudio listed as an authorized app under *Authorized OAuth Apps*. If you don't this is a good time to ask a question.
+- To confirm the connection, open [GitHub Settings > Applications](https://github.com/settings/applications). RStudio should appear under *Authorized OAuth Apps*. If it does not, ask for help before continuing.
 
 ```{r github-auth-6, echo = FALSE}
 knitr::include_graphics("img/github-auth-6.png")
 ```
 
-# Getting Started
+# Getting started
 
-Each of your assignments will begin with the following steps.
+Each assignment will begin with a similar workflow.
 
-**NOTE:** If you're reading this in a Knitted output, it probably means you've completed these steps already, in which case, consider this review.
+**If you are reading a Knitted version of these instructions, you may already have completed these steps. Treat them as review.**
 
-**Steps to generate your own copy of the course materials for each Unit**:
+## Create your copy of the course repository
 
--   Click on the Github repository you want to create your own copy of (e.g., `unit-1`)
--   From the repository landing page, add '/generate' to the end of the url and hit return/enter
--   Skip down to **Owner** and choose `EAES-380`. **Do NOT choose your own account!**
--   Under **Repository Name** enter `unit-X-yourlastname`. 
-    - E.g., I would enter `unit-1-mcnicol` for Unit 1.
--   You can ignore the **Description** box.
--   Make sure your own repo is **Private**. It should be private by default.
--   Click **Create Repository** and you will be redirected to your generated repo.
+- Open the GitHub repository you want to copy (for example, `unit-1`).
+- Add `/generate` to the end of the repository URL and press Return/Enter.
+- Under **Owner**, choose `EAES-380`. **Do not choose your personal account.**
+- Under **Repository name**, enter `unit-X-yourlastname`.
+    - For example: `unit-1-mcnicol`.
+- You can leave **Description** blank.
+- Confirm that the repository is **Private**.
+- Click **Create repository**.
 
-**Steps to copy your generated repo into an RStudioCloud Project and open instructions**:  
+## Create your RStudio Cloud project
 
--   Copy the URL of the repo you created using the green `Code` button
--   Copy/clone it into a `New Project from a GitHub Repo` in [RStudio Cloud](rstudio.cloud).
--   Navigate to the exercise, lab, or homework folder using the `File` pane.
--   Open the R Markdown instructions `lab-X-instructions.Rmd` or `hw-X-instructions.Rmd` and, Knit.
+- Copy the URL of your generated repository using the green **Code** button on GitHub.
+- Clone it into a **New Project from a GitHub Repo** in RStudio Cloud.
+- Use the **Files** pane to navigate to the appropriate exercise, lab, or homework folder.
+- Open `lab-01-instructions.Rmd` and Knit it.
+- Open `lab-01-starter.Rmd`. **This is the file you will complete.**
 
-## Warm up
+# Warm-up: R Markdown + Git
 
-Before we introduce the data, let's warm up with some simple exercises.
+## YAML
 
 ```{marginfigure}
-The top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for "YAML Ain't Markup Language". It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
+The section at the top of an R Markdown file between the two sets of three dashes is called YAML. It contains metadata and output settings for the document.
 ```
 
-### YAML
+Open `lab-01-starter.Rmd`.
 
-Open the starter file named `lab-01-starter.Rmd` in your project directory.  
-
-Change the author name to your name, change the date, and knit the document.  
-
-**The starter file is where you will make ALL of your code and text edits. You will NOT need to make any edits to the instructions files throughout the course.** (Unless you are fixing one of my typos ;) )
+A. Replace `Insert your name here` with your name.
+B. Replace `Insert date here` with today's date.
+C. Complete and sign the honor-code statement.
+D. Knit the document.
 
 ```{r yaml-raw-to-rendered, fig.fullwidth=TRUE, echo = FALSE}
 knitr::include_graphics("img/yaml-raw-to-rendered.png")
 ```
 
-### Committing changes
+## Commit your changes
 
-Then go to the Git pane in your RStudio.
+Go to the **Git** pane in RStudio. If you changed your `.Rmd` file, it should appear in the list.
 
-If you have made changes to your `.Rmd` file, you should see the file listed here.  
+Select the changed file and click **Diff**. The Diff view shows how the current version differs from the most recent committed version.
 
-Click on it to select it in this list and then click on **Diff**.  
+If the changes look correct, enter the commit message:
 
-This shows you the *difference* between the last committed state of the document and its current state that includes your changes.  
+`Update author and honor code`
 
-If you're happy with these changes, write "Update author name" in the **Commit message** box and hit **Commit**.
+Then click **Commit**.
 
 ```{r update-author-name-commit, fig.fullwidth=TRUE, echo = FALSE}
 knitr::include_graphics("img/update-author-name-commit.png")
 ```
 
-**Advice on When to Commit:** You don't have to commit after every change! You should consider committing states that are *meaningful to you* for inspection, comparison, or restoration.  
+> **When should you commit?** You do not need to commit after every keystroke. Commit meaningful stages of your work that you may want to inspect, compare, or restore later. Early in the semester, we will suggest useful checkpoints and commit messages.
 
-In the first few assignments we will tell you exactly when to commit and, in some cases, what commit message to use. As the semester progresses we will let you make these decisions.
+## Push your changes
 
-### Pushing changes
+A **commit** records a version of your work locally. A **push** sends those commits to your private repository on GitHub so that your instructors can see and grade them.
 
-Now that you have made an update and committed this change, it's time to push these changes to the web! Or more specifically, to your private repo on our class GitHub organization (`EAES-420-Spring-24`).  
+Click **Push** in the Git pane. Follow the authentication prompts if needed.
 
-**Why?** Because it lets us - "your instructors" - see your changes and grade your work. Don't worry, your repo is *not* visible to your classmates!  
+# Packages and data
 
-**How?** In order to push your changes to GitHub, click on **Push**. This will prompt a dialogue box where you first need to enter your user name, and then your Github PAT (personal access token - just a fancy password).
+## Load packages
 
-## Packages
+In this lab we use two packages:
 
-In this lab we will work with two packages:  
+- **datasauRus**: contains the unusual x-y datasets used in this lab.
+- **tidyverse**: a collection of packages for data manipulation and visualization.
 
-- **datasauRus**: containing the shapes (x-y plot data) we'll be using
-- **tidyverse**: a collection of packages for doing data analysis. 
-  
-These packages are already **installed** for you. However, you still need to **load** them, to make them active in your session.
+The packages are already **installed**, but you must still **load** them into each new R session.
 
-To **load** the packages, navigate to your `lab-01-starter.Rmd` window (where you just updated the YAML) and click the green play button at the top-right of the first code chunk below the YAML. 
+Navigate to `lab-01-starter.Rmd` and run the `load-packages` chunk using the green **Run Current Chunk** button.
 
-This green "play" button is called the **Run Current Chunk** button. You will use it a lot. :)
+```{r load-packages-demo, message=FALSE}
+library(tidyverse)
+library(datasauRus)
 
-```{r load-packages, message=FALSE}
-library(tidyverse) # loads the tidyverse package
-library(datasauRus) # loads the datasauRus package
-datasaurus_dozen <- datasaurus_dozen %>% # don't worry about these last two lines
+datasaurus_dozen <- datasaurus_dozen %>%
   rename(shape = dataset)
 ```
 
-## Data
+> The final two lines rename the package's `dataset` column to `shape`. You do not need to understand that code yet; we will learn the relevant tools soon.
 
-This lab is designed to show you why data visualization is important and how summary statistics alone can be misleading.  
+## Inspect the data
 
-The data we will be working with today is called `datasaurus_dozen` and it an object stored in the `datasauRus` package. `datasaurus_dozen` contains x and y coordinates for 13 shapes. The summary statistics for each of these shapes are the same, but the shapes look very different.   
-  
-To find out more about `datasaurus_dozen`, navigate to your starter file, and replace the text in the `demo-code-chunk` with:  
+This lab demonstrates why data visualization matters and why summary statistics alone can be misleading.
 
-`?datasaurus_dozen`  
+The dataset is called `datasaurus_dozen`. It contains x and y coordinates for 13 different shapes. The datasets have nearly identical summary statistics, but their visual patterns are dramatically different.
 
-Push the **Run Current Chunk** button to open the help file.
+In your starter file, locate the `inspect-datasaurus` chunk and run:
 
-```{marginfigure}
-A question mark `?` before the name of an object will always bring up its help file.
+```r
+?datasaurus_dozen
 ```
 
+A question mark before an R object or function opens its help documentation.
 
 # Exercises
 
-The following exercises will guide you through an exploration of the `datasaurus_dozen` dataset and help show you why data visualization is important.  
+For each exercise:
 
-For each exercise, **read** the exercise prompt in the `lab-01-instructions.Rmd` or knitted output file, then **write** your code and/or text answer in the `lab-01-starter.Rmd`, under the appropriate exercise.
+A. Read the prompt here.
+B. Complete the corresponding section in `lab-01-starter.Rmd`.
+C. Run your code and inspect the output.
+D. Write any requested interpretation in complete sentences.
+E. Knit before moving on when a checkpoint is indicated.
 
-**NOTE:** Most exercises contain more than one element/question, denoted by a bullet point. Make sure you respond to every bullet point in your starter file before moving onto the next exercise.
+## Exercise 1 — Learn what is in the dataset
 
-1.  Based on the **help** file:  
+**Goal:** Practice using R documentation to identify the size and variables of a dataset.
 
-- How many rows and how many columns does the `datasaurus_dozen` file have? 
-- What are the variables included in the data frame? 
+Based on the `datasaurus_dozen` **help file**, answer both questions in your starter file:
 
-### End of Exercise 1
+- How many rows and columns does the original `datasaurus_dozen` dataset contain?
+- What variables are included in the original data frame?
 
-OK, now let's take a look at what these datasets are.  
+Then run the `count-shapes` chunk in your starter file. It creates a frequency table showing the number of observations in each shape.
 
-To do so we can make a *frequency table* of the shape variable:
-
-```{r}
+```{r count-shapes-demo}
 datasaurus_dozen %>%
   count(shape) %>%
   print(13)
 ```
 
 ```{marginfigure}
-Matejka, Justin, and George Fitzmaurice. "Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing." Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems. ACM, 2017.
+Matejka, Justin, and George Fitzmaurice. "Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing." Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems. ACM, 2017.
 ```
 
-The original Datasaurus (`dino`) was created by Alberto Cairo in [this great blog post](http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html).  
+The original Datasaurus (`dino`) was created by Alberto Cairo. The other datasets (`star`, `away`, `circle`, etc.) were generated by Matejka and Fitzmaurice using simulated annealing. Their key demonstration is that datasets can share essentially the same summary statistics while having very different visual structures.
 
-The other datasets (`star`, `away`, `circle`, etc.) were generated using a method called simulated annealing and the process is described in the paper *Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics* through Simulated Annealing by Justin Matejka and George Fitzmaurice. In the paper, the authors simulate a variety of datasets that have the same summary statistics as the `dino`, but have very different visual distributions (shapes).
+### Exercise 1 checkpoint
 
-🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 1". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ **Knit, commit, and push.** Suggested commit message: `Complete Exercise 1`.
 
-2.  In this exercise, you will run two R code chunks provided below **and** in your starter file to:
+## Exercise 2 — Visualize and summarize the dinosaur
 
-- Create a scatter plot of `y` vs. `x` for the `dino` shape
-- Calculate the correlation coefficient between `x` and `y` for the `dino` shape
+**Goal:** Follow a complete analysis workflow: subset data → inspect data → visualize data → calculate a summary statistic.
 
-*Note:* For this exercise, you don't need to add any code in your starter file, just follow along.
+For this exercise, the code is already provided in your starter file. **Do not replace it. Run each chunk and make sure you understand what it does.**
 
-Before we can plot the data in the `dino` shape, we need to filter out the other shapes in the dataset, leaving just the `dino` dataset. The code chunk below does this:
+### Step 1: Filter the dataset
 
-```{r filter-for-dino}
+We first keep only observations belonging to the `dino` shape:
+
+```{r filter-for-dino-demo}
 dino_data <- datasaurus_dozen %>%
   filter(shape == "dino")
 ```
 
-Let's break down this code:  
+The pipe operator `%>%` passes the object on its left to the function on its right. Here, we start with `datasaurus_dozen` and `filter()` it to rows where `shape == "dino"`.
 
-First, the pipe operator, `%>%`, takes what comes before it and sends it as the first argument to what comes after it. So here, we're saying `filter` the `datasaurus_dozen` data frame for observations where `shape == "dino"`.
+The assignment operator `<-` stores the resulting filtered data frame under the name `dino_data`.
 
-Second, the assignment operator: `<-`, assigns the name `dino_data` to the filtered data frame.
+### Step 2: Inspect the filtered data
 
-Next, let's take a look at what variables the `dino` dataset contains. The code chunk below does this:
-
-```{r look-at-dino-head}
+```{r look-at-dino-head-demo}
 head(dino_data)
 ```
 
-Let's break down this code:
+`head()` displays the first few rows. Confirm that the filtered object contains the variables `shape`, `x`, and `y`.
 
-This code chunk contains a single function `head()` which returns the first few rows of a dataset, as well as the column (variable) names. Do you see that there are three variables: `shape`, `x` and `y`?
+### Step 3: Visualize the data
 
-OK, now finally, lets visualize these data. The code chunk below does this:
-
-```{r plot-dino, fig.fullwidth=TRUE}
+```{r plot-dino-demo, fig.fullwidth=TRUE}
 ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
 
-Let's break this chunk down:
+The `ggplot()` function begins the plot. `data = dino_data` identifies the data frame, while `aes(x = x, y = y)` maps variables to the x- and y-axes. `geom_point()` adds one point for each observation.
 
-We use the `ggplot()` function for plotting.  
+You will learn much more about the layered grammar of `ggplot2` next week. For now, focus on recognizing the basic structure.
 
-The first argument (`data = `) specifies the data object you're visualizing.  
+### Step 4: Calculate a correlation coefficient
 
-Next we define the `aes`thetic mappings.  
+A correlation coefficient, usually written as $r$, measures the strength and direction of a **linear** relationship between two variables.
 
-In other words, we define which columns of the dataset get mapped to certain aesthetic features of the plot. In our example, the `x` axis will show data from the variable called `x` and the `y` axis will show data from the variable called `y`.  
-
-Then, in the last line of the chunk above, we add a layer to this plot where we define which `geom`etric shapes we want to use to represent each observation in the data. In this case we want these to be points, hence `geom_point()`.
-
-If this seems like a lot right now, it is.
-
-But don't worry! You will learn more about building data visualizations with layers in detail next week. For now, keep following along with the code that is provided.
-
-# Summary Statistics: Correlation Coefficient
-
-For the second part of these exercises, we need to calculate a summary statistic: the correlation coefficient.  
-Correlation coefficients, often referred to with the letter $r$ in statistics, measures the linear (straight-line) association between two variables.  
-
-You will see in the visualizations that some of the pairs of variables we plot **do not** have a linear relationship between them.  
-
-This is exactly why we want to visualize first: visualize to assess the form of the relationship, and calculate $r$ only if it seems useful to do so.  
-
-In this case, calculating a correlation coefficient really doesn't make sense since the relationship between `x` and `y` is definitely not linear -- it's dinosaurial! 🦖
-
-But, to demonstrate this, let's calculate the correlation coefficient between `x` and `y`.
-
-```{marginfigure}
-Start with `dino_data` and calculate a summary statistic that we will call `r` as the `cor`relation between `x` and `y`.
-```
-
-```{r dino-cor}
+```{r dino-cor-demo}
 dino_data %>%
   summarize(r = cor(x, y))
 ```
 
-Just a reminder: You do not need to write any code or text for Exercise 2. Just make sure you understand the text above, run the code chunks, and view the output.
+The dinosaur is an intentionally useful warning: a single number such as $r$ cannot tell you the shape of a relationship. **Visualize the data before deciding what a summary statistic means.**
 
-### End of Exercise 2
+No additional code or written answer is required for Exercise 2. Your job is to run the provided chunks and understand the workflow.
 
-🧶 ✅ ⬆️ *Knit, commit, and push your changes to GitHub with the commit message "Added answer for Ex 2". Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+### Exercise 2 checkpoint
 
-3.  Plot `y` vs. `x` for the `star` shape.  
+🧶 ✅ ⬆️ **Knit, commit, and push.** Suggested commit message: `Complete Exercise 2`.
 
-- You should reuse (copy and paste) the code chunks we introduced above, just replace the shape name with the desired shape.
-- Then, calculate the correlation coefficient between `x` and `y` for this shape. 
-- How does this value compare to the `r` of `dino`?
+## Exercise 3 — Repeat the workflow for the star
 
-### End of Exercise 3
+**Goal:** Adapt an existing analysis rather than starting from scratch.
 
-🧶 ✅ ⬆️ *This is another good place to pause, knit, commit changes with the commit message "Added answer for Ex 3", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+In your starter file:
 
-4.  Plot `y` vs. `x` for the `circle` shape.  
+- Create a new object containing only the `star` observations.
+- Plot `y` versus `x` for the `star` shape.
+- Calculate the correlation coefficient between `x` and `y` for `star`.
+- In **1–2 complete sentences**, compare the `star` correlation coefficient with the `dino` correlation coefficient. Does the numerical similarity match the visual similarity of the two datasets?
 
-- You should reuse (copy and paste) the code chunks we introduced above, just replace the shape name with the desired shape.
-- Then, calculate the correlation coefficient between `x` and `y` for this shape. 
-- How does this value compare to the `r` of `dino`?
+Reuse the Exercise 2 code as a model. Change only what needs to change.
 
-### End of Exercise 4
+### Exercise 3 checkpoint
 
-🧶 ✅ ⬆️ *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
+🧶 ✅ ⬆️ **Knit, commit, and push.** Suggested commit message: `Complete Exercise 3`.
 
-```{marginfigure}
-Facet by the shape variable, placing the plots in a 3-column grid, and do not add a legend.
-```
+## Exercise 4 — Repeat the workflow for the circle
 
-5.  Finally, let's plot all shapes at once. In order to do this we will make use of faceting.  
+**Goal:** Reinforce the same workflow while taking more responsibility for organizing your own code.
 
-- Simply add the code chunks below to your starter file and run them.
+In your starter file:
 
-```{r all-viz, eval=FALSE, fig.fullwidth=TRUE}
-ggplot(datasaurus_dozen, aes(x = x, y = y, color = shape))+
-  geom_point()+
+- Create a new object containing only the `circle` observations.
+- Plot `y` versus `x` for the `circle` shape.
+- Calculate the correlation coefficient between `x` and `y` for `circle`.
+- In **1–2 complete sentences**, compare the `circle` correlation coefficient with `dino`. What does the comparison tell you about relying on correlation alone?
+
+The code chunks in your starter file are already named descriptively. Use those names to keep your analysis organized.
+
+### Exercise 4 checkpoint
+
+🧶 ✅ ⬆️ **Knit, commit, and push.** Suggested commit message: `Complete Exercise 4`.
+
+## Exercise 5 — See all of the shapes at once
+
+**Goal:** Connect the visual evidence from all 13 datasets to their summary correlation coefficients.
+
+First, run the provided faceted plot in your starter file:
+
+```{r all-viz-demo, fig.fullwidth=TRUE}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = shape)) +
+  geom_point() +
   facet_wrap(~ shape, ncol = 3) +
   theme(legend.position = "none")
 ```
 
-And we can use the `group_by` function to generate all the summary correlation coefficients.
+```{marginfigure}
+`facet_wrap()` divides one plot into panels according to a categorical variable. Here, each value of `shape` gets its own panel.
+```
 
-```{r all-r, eval=FALSE}
+Next, run the grouped correlation calculation:
+
+```{r all-r-demo}
 datasaurus_dozen %>%
   group_by(shape) %>%
   summarize(r = cor(x, y)) %>%
   print(13)
 ```
 
-OK, you can see *all* of the shapes on one plot. And you can see *all* of the correlation coefficients. Does anything surprise you? Why might it be important to visualize data first, and not merely rely on descriptive statistics?
+Then answer in **2–3 complete sentences**:
 
-### End of Exercise 5
+- What surprises you when you compare the plots with the correlation coefficients?
+- Why is it important to visualize data rather than relying only on descriptive statistics?
 
-You're done with the data analysis exercises, but we'd like you to try doing two more things:
+# Finishing touches
+
+## Resize your figures
 
 ```{r fig-resize-global, fig.margin = TRUE, echo = FALSE, fig.width=3}
 knitr::include_graphics("img/fig-resize-global.png")
 ```
 
--   **Resize your figures:**
+Use the gear icon above the R Markdown document and select **Output Options...**. In the **Figures** tab, experiment with figure height and width, then Knit again to inspect the result.
 
-Click on the gear icon in on top of the R Markdown document, and select "Output Options..." in the dropdown menu.  
-
-In the pop up dialogue box go to the Figures tab and change the height and width of the figures, and hit OK when done.  
-
-Then, knit your document and see how you like the new sizes.  
-
-Change and knit again and again until you're happy with the figure sizes.  
-
-Note that these values get saved in the YAML.  
+These settings are stored in the YAML. You can also change the size of individual figures using chunk options such as `fig.width` and `fig.height`.
 
 ```{r fig-resize-local, fig.margin = TRUE, echo = FALSE, fig.width=3}
 knitr::include_graphics("img/fig-resize-local.png")
 ```
 
-You can also use different figure sizes for different figures.  
-
-To do so click on the gear icon within the chunk where you want to make a change.  
-
-Changing the figure sizes added new options to these chunks: `fig.width` and `fig.height`.  
-
-You can change them by defining different values directly in your R Markdown document as well.
+## Change the appearance of your report
 
 ```{r theme-highlight, fig.margin = TRUE, echo = FALSE, fig.width=3}
 knitr::include_graphics("img/theme-highlight.png")
 ```
 
--   **Change the look of your report:**
+Open **Output Options...** again and experiment with available syntax-highlighting and theme options. Knit after making changes so you can see the effect.
 
-Once again click on the gear icon in on top of the R Markdown document, and select "Output Options..." in the drop-down menu.  
+# Submission checklist
 
-In the General tab of the pop up dialogue box try out different Syntax highlighting and theme options.  
+Before you finish, confirm that:
 
-Hit OK and knit your document to see how it looks.  
+- [ ] I signed the academic-integrity statement in both the instructions and starter files.
+- [ ] My name and date are correct in the starter-file YAML.
+- [ ] I answered every requested question in complete sentences.
+- [ ] All required code is contained in the starter `.Rmd` file, not only in the Console.
+- [ ] My plots and numerical outputs appear as expected.
+- [ ] I ran the analysis from top to bottom.
+- [ ] `lab-01-starter.Rmd` Knits without errors.
+- [ ] I committed and pushed all final changes to GitHub.
+- [ ] My Git pane is clear and the latest files are visible in my GitHub repository.
 
-Play around with these until you're happy with the look.
-
-<br>
-
-```{marginfigure}
-Not sure how to use emojis on your computer? Maybe a teammate can help? Or you can ask your TA as well!
-```
-
-🧶 ✅ ⬆️ *Yay, you're done! Commit all remaining changes, use the commit message "Done with Lab 1!", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards. Before you wrap up the assignment, make sure all documents are updated on your GitHub repo.*
+🧶 ✅ ⬆️ **Final step:** Knit, commit all remaining changes with a message such as `Complete Lab 1`, and push them to GitHub.

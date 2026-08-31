@@ -2,81 +2,189 @@
 title: "Lab 01 - Hello R"
 author: "Insert your name here"
 date: "Insert date here"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
 ---
 
-## Load packages and data
+# Academic integrity and honor code
 
-```{r load-packages, message=FALSE}
-library(tidyverse) 
+By completing and submitting this lab, I certify that:
+
+- I completed the submitted work myself.
+- I did not use generative AI (including ChatGPT, Claude, Gemini, Copilot, Grok, or similar tools) to generate, debug, revise, or interpret code or written answers for this assignment.
+- I may use course materials, lecture notes, R documentation/help files, and other resources explicitly approved by the instructors.
+- I understand that I am responsible for being able to explain all code and written work that I submit.
+
+**Name:** ______________________________  
+**Signature:** ___________________________  
+**Date:** _______________________________
+
+# Before you begin
+
+Work through the exercises using `lab-01-instructions.Rmd` as your guide. Keep **all submitted code in this file**, run your analysis from top to bottom, and Knit frequently.
+
+Before asking for help, check your spelling, parentheses, quotation marks, package loading, and the order in which you ran your chunks.
+
+# Load packages and prepare data
+
+```{r load-packages, message=FALSE, warning=FALSE}
+# GOAL: Load the packages used in this lab and prepare the Datasaurus dataset.
+library(tidyverse)
 library(datasauRus)
+
+datasaurus_dozen <- datasaurus_dozen %>%
+  rename(shape = dataset)
 ```
 
-## Exercises
+# Exercises
 
-### Exercise 1
+## Exercise 1 — Inspect the dataset
 
-Remove this text, and add your answer for Exercise 1 here.
+**Goal:** Use the R help documentation to identify what is contained in a dataset.
 
-### Exercise 2
+Run the following chunk to open the help file.
 
-The answers for this Exercise are given for you below.
-But you should clean up some of the narrative so that it only includes what you want to turn in.
+```{r inspect-datasaurus, eval=FALSE}
+?datasaurus_dozen
+```
 
-First let's plot the data in the dino dataset:
+**Answer both questions in complete sentences:**
 
-```{r plot-dino, fig.height=3, fig.width=6}
+1. How many rows and columns does the original `datasaurus_dozen` dataset contain?
+2. What variables are included in the original data frame?
+
+> Replace this text with your answer.
+
+Now run the following code to count the number of observations in each shape.
+
+```{r count-shapes}
+datasaurus_dozen %>%
+  count(shape) %>%
+  print(13)
+```
+
+## Exercise 2 — Dinosaur example
+
+**Goal:** Follow the complete workflow of filtering, inspecting, plotting, and summarizing one dataset.
+
+The code for this exercise is provided. Run each chunk and make sure you understand the output. **No additional written answer is required.**
+
+First, keep only the observations belonging to the dinosaur:
+
+```{r filter-dino}
 dino_data <- datasaurus_dozen %>%
   filter(shape == "dino")
+```
 
+Inspect the first few rows:
+
+```{r inspect-dino}
+head(dino_data)
+```
+
+Visualize `y` versus `x`:
+
+```{r plot-dino, fig.height=3, fig.width=6}
 ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
 
-And next calculate the correlation between `x` and `y` in this dataset:
+Calculate the correlation coefficient between `x` and `y`:
 
 ```{r cor-dino}
 dino_data %>%
   summarize(r = cor(x, y))
 ```
 
-### Exercise 3
+## Exercise 3 — Star
 
-Add code and narrative as needed.
-Note that the R chunks are labelled with `plot-star` and `cor-star` to provide spaces to place the code for plotting and calculating the correlation coefficient.
-To finish, clean up the narrative by removing these instructions.
+**Goal:** Adapt the Exercise 2 workflow to a new shape.
 
-I'm some text, you should replace me with more meaningful text...
-(Hint: describe what are you doing in the next code chunk)
+Create a `star_data` object containing only the `star` observations.
+
+```{r filter-star}
+# Your code here
+```
+
+Plot `y` versus `x` for the star.
 
 ```{r plot-star}
-
+# Your code here
 ```
 
-I'm some text, you should replace me with more meaningful text...
+Calculate the correlation coefficient between `x` and `y`.
 
 ```{r cor-star}
-
+# Your code here
 ```
 
-### Exercise 4
+**Interpretation (1–2 complete sentences):** How does the `star` correlation coefficient compare with the `dino` correlation coefficient? Does the numerical similarity match the visual similarity of the two datasets?
 
-Add code and narrative as needed.
-Note that two R chunks are given but they are not labeled.
-Use the convention from above to name them appropriately.
+> Replace this text with your answer.
 
-```{r}
+## Exercise 4 — Circle
 
+**Goal:** Repeat the workflow for a second shape and keep your code organized using descriptive chunk names.
+
+Create a `circle_data` object containing only the `circle` observations.
+
+```{r filter-circle}
+# Your code here
 ```
 
-```{r}
+Plot `y` versus `x` for the circle.
 
+```{r plot-circle}
+# Your code here
 ```
 
-### Exercise 5
+Calculate the correlation coefficient between `x` and `y`.
 
-Add code and narrative as needed.
-To add R chunks either type out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, green C+.
-  
+```{r cor-circle}
+# Your code here
+```
 
-**The fastest way to insert a code chunk is to use the keyboard shortcut: command-option-i (on MacOS) or Control-Alt-i (on Windows).** Or you can add R chunks by manually typing out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, green C+.
+**Interpretation (1–2 complete sentences):** How does the `circle` correlation coefficient compare with `dino`? What does this comparison tell you about relying on correlation alone?
+
+> Replace this text with your answer.
+
+## Exercise 5 — All shapes
+
+**Goal:** Compare the visual patterns of all 13 datasets with their correlation coefficients.
+
+Run the faceted plot below.
+
+```{r plot-all-shapes, fig.width=8, fig.height=8}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = shape)) +
+  geom_point() +
+  facet_wrap(~ shape, ncol = 3) +
+  theme(legend.position = "none")
+```
+
+Now calculate the correlation coefficient for every shape.
+
+```{r cor-all-shapes}
+datasaurus_dozen %>%
+  group_by(shape) %>%
+  summarize(r = cor(x, y)) %>%
+  print(13)
+```
+
+**Interpretation (2–3 complete sentences):** What surprises you when you compare the plots with the correlation coefficients? Why is it important to visualize data rather than relying only on descriptive statistics?
+
+> Replace this text with your answer.
+
+# Submission checklist
+
+Before submitting, confirm that:
+
+- [ ] I signed the academic-integrity statement.
+- [ ] My name and date are correct in the YAML.
+- [ ] I answered every requested question in complete sentences.
+- [ ] All required code is in this `.Rmd` file, not only in the Console.
+- [ ] I ran the analysis from top to bottom.
+- [ ] My plots and numerical outputs appear as expected.
+- [ ] This document Knits without errors.
+- [ ] I committed and pushed my final changes to GitHub.
