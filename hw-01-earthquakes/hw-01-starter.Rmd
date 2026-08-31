@@ -1,13 +1,33 @@
----
 title: "HW 01 - Earthquakes"
 author: "Insert your name here"
 date: "Insert date here"
 output: html_document
 ---
 
+# Academic Integrity Statement
+
+By completing and submitting this assignment, I certify that:
+
+- I completed all work myself.
+- I did not use generative artificial intelligence (e.g., ChatGPT, Claude, Gemini, Copilot, Grok) to generate code, written responses, or interpretations for this assignment.
+- I may have consulted the course materials, documentation, lecture notes, and approved references, but all submitted work represents my own understanding.
+- I understand that submitting AI-generated work constitutes academic misconduct under the course policies.
+
+**Name:** _______________________
+
+**Signature:** _______________________
+
+**Date:** _______________________
+
+# Learning Goals
+
+- Practice using R Markdown.
+- Create and interpret exploratory visualizations.
+- Communicate results clearly using complete sentences.
+
 ## Load packages and data
 
-```{r load-packages, message = FALSE}
+```{r load-packages, message=FALSE}
 library(tidyverse)
 library(openintro)
 ```
@@ -16,28 +36,78 @@ library(openintro)
 
 ### Exercise 1
 
-There are \_\_\_ earthquakes in the dataset.
+**Goal:** Become familiar with the dataset.
+
+There are ___ earthquakes in the dataset.
 
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 2 here.
+**Goal:** Produce the requested visualization and describe what you observe.
+
+Write your answer below using complete sentences.
+
+```{r exercise-2}
+
+# Your code here
+
+```
 
 ### Exercise 3
 
-Remove this text, and add your answer for Exercise 3 here.
+**Goal:** Continue exploring the earthquake dataset.
+
+```{r exercise-3}
+
+# Your code here
+
+```
+
+Write 2–3 complete sentences interpreting your results.
 
 ### Exercise 4
 
-Remove this text, and add your answer for Exercise 4 here.
+**Goal:** Create the requested figure and interpret it.
+
+```{r exercise-4}
+
+# Your code here
+
+```
 
 ### Exercise 5
 
-Remove this text, and add your answer for Exercise 5 here.
+```{r exercise-5}
+
+# Your code here
+
+```
+
+Provide a brief interpretation.
 
 ### Exercise 6
 
-Remove this text, and add your answer for Exercise 6 here.
+```{r exercise-6}
+
+# Your code here
+
+```
+
+Provide a brief interpretation.
 
 ### Exercise 7
 
-Remove this text, and add your answer for Exercise 7 here.
+```{r exercise-7}
+
+# Your code here
+
+```
+
+Provide a brief interpretation.
+
+# Submission Checklist
+
+- [ ] Document knits successfully.
+- [ ] All placeholder text has been removed.
+- [ ] All figures appear in the knitted document.
+- [ ] Written responses are in complete sentences.
+- [ ] Changes have been committed and pushed to GitHub.

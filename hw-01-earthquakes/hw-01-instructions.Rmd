@@ -24,6 +24,50 @@ library(ggrepel)
 knitr::include_graphics("img/seismogram.jpeg")
 ```
 
+# Academic Integrity Statement
+
+By completing and submitting this assignment, I certify that:
+
+- I completed all work myself.
+- I did not use generative artificial intelligence (e.g., ChatGPT, Claude, Gemini, Copilot, Grok) to generate code, written responses, or interpretations for this assignment.
+- I may have consulted the course materials, documentation, lecture notes, and approved references, but all submitted work represents my own understanding.
+- I understand that submitting AI-generated work constitutes academic misconduct under the course policies.
+
+**Name:** _______________________
+
+**Signature:** _______________________
+
+**Date:** _______________________
+
+# Learning Goals
+
+By the end of this homework you should be able to:
+
+- Import and explore a dataset in R.
+- Create informative visualizations with **ggplot2**.
+- Interpret graphical patterns using complete scientific sentences.
+- Practice a reproducible R Markdown workflow.
+
+# Deliverables
+
+Submit your completed knitted HTML file and the corresponding `.Rmd` file to GitHub Classroom.
+
+## Before You Begin
+
+- Pull the latest version of your repository.
+- Open the starter `.Rmd` file.
+- Knit frequently as you work.
+- Run your code from top to bottom rather than individual lines.
+
+## Before asking for help
+
+Check the following:
+
+- Does your document Knit?
+- Did you Run All?
+- Did you spell every variable name correctly?
+- Did you forget a quotation mark, comma, or parenthesis?
+
 The goal of this assignment is to give you more practice using R, RStudio, Git, and GitHub in combination. You'll be using the same basic workflow throughout the whole course. This time you will do an exploratory analysis of global earthquake data, using visualizations. 
 
 # Getting started
@@ -424,3 +468,14 @@ ggplot(earthquakes, aes(x = richter, y = deaths)) +
 - Does this final visualization give you more or less confidence in your last response about the relationship between earthquake magnitude and death toll?
 
 🧶 ✅ ⬆️ *Good job! You're finished! Commit and push your starter Rmd. Make sure that your last push to the repo comes before the deadline. You should confirm that what you committed and pushed are indeed in your repo that we will see by visiting your repo on GitHub.*
+
+
+# Submission Checklist
+
+Before submitting:
+
+- [ ] My document knits without errors.
+- [ ] I removed all instructional placeholder text.
+- [ ] All code is included in the R Markdown document.
+- [ ] I answered every question in complete sentences.
+- [ ] I committed and pushed my work to GitHub.
